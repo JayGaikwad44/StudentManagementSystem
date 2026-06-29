@@ -7,7 +7,11 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add Controllers
+// ==========================
+// Add Services
+// ==========================
+
+// Controllers
 builder.Services.AddControllers();
 
 // Swagger (.NET 8)
@@ -17,23 +21,26 @@ builder.Services.AddSwaggerGen();
 // Register JwtService
 builder.Services.AddScoped<JwtService>();
 
-// Configure SQL Server
+// Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configure CORS
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactApp", policy =>
     {
-        policy.WithOrigins("https://student-management-system.vercel.app")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.WithOrigins(
+                "http://localhost:5173",
+                "https://student-management-system.vercel.app" // Replace with your actual Vercel URL if different
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod();
     });
 });
 
-// Configure JWT Authentication
+// JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -56,12 +63,16 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Configure Authorization
+// Authorization
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure HTTP request pipeline
+// ==========================
+// Configure Middleware
+// ==========================
+
+// Swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -77,6 +88,7 @@ app.UseCors("ReactApp");
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Map Controllers
 app.MapControllers();
 
 app.Run();
