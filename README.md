@@ -16,7 +16,41 @@ A full-stack Student Management System built using **ASP.NET Core Web API**, **R
 - 📱 Responsive UI
 
 ---
+## 📸 Screenshots
 
+### 🔐 Login Page
+
+![Login](images/login.png)
+
+---
+
+### 📝 Register Page
+
+![Register](images/register.png)
+
+---
+
+### 📊 Dashboard
+
+![Dashboard](images/dashboard.png)
+
+---
+
+### 👨‍🎓 Student List
+
+![Students](images/students.png)
+
+---
+
+### ➕ Add Student
+
+![Add Student](images/add-student.png)
+
+---
+
+### ✏️ Edit Student
+
+![Edit Student](images/edit-student.png)
 ## 🛠️ Tech Stack
 
 ### Frontend
