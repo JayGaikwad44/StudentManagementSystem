@@ -10,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add Controllers
 builder.Services.AddControllers();
 
+// Swagger (.NET 8)
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 // Register JwtService
 builder.Services.AddScoped<JwtService>();
 
@@ -55,15 +59,13 @@ builder.Services.AddAuthentication(options =>
 // Configure Authorization
 builder.Services.AddAuthorization();
 
-// OpenAPI
-builder.Services.AddOpenApi();
-
 var app = builder.Build();
 
 // Configure HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
