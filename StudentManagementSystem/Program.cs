@@ -27,7 +27,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins("https://student-management-system.vercel.app")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
